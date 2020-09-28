@@ -2,8 +2,9 @@
 {
     public class ExternalProvidersConfiguration
     {
-        public bool UseGitHubProvider { get; set; }
-        public string GitHubClientId { get; set; }
-        public string GitHubClientSecret { get; set; }
+        public bool UseGenesysCloudProvider { get; set; }
+        public string GenesysCloudClientId { get; set; }
+        public string GenesysCloudClientSecret { get; set; }
+        public string GenesysCloudRedirectUri { get; set; }
     }
 }

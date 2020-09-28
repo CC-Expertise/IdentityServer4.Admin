@@ -22,6 +22,7 @@ using Skoruba.IdentityServer4.STS.Identity.Configuration.Constants;
 using Skoruba.IdentityServer4.STS.Identity.Configuration.Interfaces;
 using Skoruba.IdentityServer4.STS.Identity.Helpers.Localization;
 using System.Linq;
+using Identity.OAuth.GenesysCloud;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
 using Skoruba.IdentityServer4.Admin.EntityFramework.MySql.Extensions;
 using Skoruba.IdentityServer4.Admin.EntityFramework.PostgreSQL.Extensions;
@@ -321,12 +322,13 @@ namespace Skoruba.IdentityServer4.STS.Identity.Helpers
         {
             var externalProviderConfiguration = configuration.GetSection(nameof(ExternalProvidersConfiguration)).Get<ExternalProvidersConfiguration>();
 
-            if (externalProviderConfiguration.UseGitHubProvider)
+            if (externalProviderConfiguration.UseGenesysCloudProvider)
             {
-                authenticationBuilder.AddGitHub(options =>
+                authenticationBuilder.AddGenesysCloud(options =>
                 {
-                    options.ClientId = externalProviderConfiguration.GitHubClientId;
-                    options.ClientSecret = externalProviderConfiguration.GitHubClientSecret;
+                    options.ClientId = externalProviderConfiguration.GenesysCloudClientId;
+                    options.ClientSecret = externalProviderConfiguration.GenesysCloudClientSecret;
+                    options.RedirectUri = externalProviderConfiguration.GenesysCloudRedirectUri;
                     options.Scope.Add("user:email");
                 });
             }

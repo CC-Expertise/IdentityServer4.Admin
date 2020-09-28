@@ -47,6 +47,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Identity.OAuth.GenesysCloud\Identity.OAuth.GenesysCloud.csproj" />
         <ProjectReference Include="..\Skoruba.IdentityServer4.Admin.EntityFramework.Identity\Skoruba.IdentityServer4.Admin.EntityFramework.Identity.csproj" />
         <ProjectReference Include="..\Skoruba.IdentityServer4.Admin.EntityFramework.MySql\Skoruba.IdentityServer4.Admin.EntityFramework.MySql.csproj" />
         <ProjectReference Include="..\Skoruba.IdentityServer4.Admin.EntityFramework.PostgreSQL\Skoruba.IdentityServer4.Admin.EntityFramework.PostgreSQL.csproj" />
