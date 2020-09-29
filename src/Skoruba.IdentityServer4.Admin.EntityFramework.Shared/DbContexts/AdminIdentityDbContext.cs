@@ -7,6 +7,11 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.Shared.DbContexts
 {
     public class AdminIdentityDbContext : IdentityDbContext<UserIdentity, UserIdentityRole, string, UserIdentityUserClaim, UserIdentityUserRole, UserIdentityUserLogin, UserIdentityRoleClaim, UserIdentityUserToken>
     {
+        public AdminIdentityDbContext()
+        {
+
+        }
+
         public AdminIdentityDbContext(DbContextOptions<AdminIdentityDbContext> options) : base(options)
         {
             
