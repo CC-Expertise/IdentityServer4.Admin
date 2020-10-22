@@ -1,16 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Skoruba.IdentityServer4.Admin.EntityFramework.PostgreSQL.Migrations.Identity
 {
-    public partial class AddCustomUserColumns : Migration
+    public partial class AddUsersInformations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "OrganisationAdmin",
+            migrationBuilder.AddColumn<string>(
+                name: "Firstname",
                 table: "Users",
-                nullable: false,
-                defaultValue: false);
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Lastname",
+                table: "Users",
+                nullable: true);
 
             migrationBuilder.AddColumn<bool>(
                 name: "SystemAdmin",
@@ -20,6 +25,11 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.PostgreSQL.Migrations.Id
 
             migrationBuilder.AddColumn<string>(
                 name: "UpdatedById",
+                table: "Users",
+                nullable: true);
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "UpdatedDate",
                 table: "Users",
                 nullable: true);
 
@@ -48,7 +58,11 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.PostgreSQL.Migrations.Id
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "OrganisationAdmin",
+                name: "Firstname",
+                table: "Users");
+
+            migrationBuilder.DropColumn(
+                name: "Lastname",
                 table: "Users");
 
             migrationBuilder.DropColumn(
@@ -57,6 +71,10 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.PostgreSQL.Migrations.Id
 
             migrationBuilder.DropColumn(
                 name: "UpdatedById",
+                table: "Users");
+
+            migrationBuilder.DropColumn(
+                name: "UpdatedDate",
                 table: "Users");
         }
     }
