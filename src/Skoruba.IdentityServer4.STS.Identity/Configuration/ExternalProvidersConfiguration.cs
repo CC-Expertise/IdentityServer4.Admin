@@ -13,5 +13,9 @@
         public string AzureInstance { get; set; }
         public string AzureAdCallbackPath { get; set; }
         public string AzureDomain { get; set; }
+        public bool UseGenesysCloudProvider { get; set; }
+        public string GenesysCloudClientId { get; set; }
+        public string GenesysCloudClientSecret { get; set; }
+        public string GenesysCloudRedirectUri { get; set; }
     }
 }
