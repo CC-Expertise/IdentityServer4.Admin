@@ -1,0 +1,33 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  pre_build:
+    commands:
+      - echo Build started on `date`
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+      - echo Install Dotnet...
+      - rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
+      - yum install dotnet-sdk-3.1 -y
+      - dotnet --version
+  build:
+    commands:
+      - echo DotNet build...
+      - dotnet build Skoruba.IdentityServer4.Admin.sln --configuration Release
+      - echo Building the Docker image...
+      - docker build -t identity-sts -f src/Skoruba.IdentityServer4.Admin.Api/Dockerfile .
+      - docker tag identity-admin:latest 171796803788.dkr.ecr.us-east-1.amazonaws.com/identity-admin:$CODEBUILD_RESOLVED_SOURCE_VERSION
+  post_build:
+    commands: 
+      - echo Setup Taskdef.json...  
+      - aws s3 cp s3://taskdefinitions-ecs-cce/identity-admin/prod-identity-admin.json ./taskdef.json 
+      - sed -i "s|COMITID|$CODEBUILD_RESOLVED_SOURCE_VERSION|g" ./taskdef.json 
+      - echo Push Image... 
+      - docker push 171796803788.dkr.ecr.us-east-1.amazonaws.com/identity-admin:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - taskdef.json
+    - appspec.yaml
