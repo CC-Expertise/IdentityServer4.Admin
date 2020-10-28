@@ -17,7 +17,7 @@ phases:
       - echo DotNet build...
       - dotnet build Skoruba.IdentityServer4.Admin.sln --configuration Release
       - echo Building the Docker image...
-      - docker build -t identity-sts -f src/Skoruba.IdentityServer4.Admin.Api/Dockerfile .
+      - docker build -t identity-admin -f src/Skoruba.IdentityServer4.Admin.Api/Dockerfile .
       - docker tag identity-admin:latest 171796803788.dkr.ecr.us-east-1.amazonaws.com/identity-admin:$CODEBUILD_RESOLVED_SOURCE_VERSION
   post_build:
     commands: 
